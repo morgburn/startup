@@ -32,7 +32,6 @@ Tired of listening to the same music on repeat? Or frustrated when your music su
 
 ![Design image: home page and add suggestion screen](images/bop_ballot_design_2.jpg)
 ![Design image: voting screen and vote results screen](images/bop_ballot_design_1.jpg)
-```
 
 ### Key features
 
@@ -58,6 +57,7 @@ I am going to use the required technologies in the following ways.
 - **DB/Login** - Store users, song suggestions, and song vote counts, user votes so that there isn't duplicate voting
 - **WebSocket** - Every vote for a song updates the list in real time and broadcast to other users.
 
+```
 ## 🚀 AWS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
