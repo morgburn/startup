@@ -49,11 +49,11 @@ I am going to use the required technologies in the following ways.
 - **CSS** - Consistent and aesthetic color choice and styling throughout the app. Simple and straightforward user interface design.
 - **React** - Uses login form, song search, voting, and displaying votes.
 - **Service** - Backend service endpoints:
-                - login
-                - adding a song suggestion
-                - submitting song votes
-                - retrieving votes
-                - Third-party call to iTunes Search API to get song data
+  - login
+  - adding a song suggestion
+  - submitting song votes
+  - retrieving votes
+  - Third-party call to iTunes Search API to get song data
 - **DB/Login** - Store users, song suggestions, and song vote counts, user votes so that there isn't duplicate voting
 - **WebSocket** - Every vote for a song updates the list in real time and broadcast to other users.
 
