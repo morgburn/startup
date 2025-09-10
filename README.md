@@ -1,8 +1,8 @@
-# Your startup name here
+# Bop Ballot
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Bop Ballot is a song suggestion app that allows you to give song suggestions, vote on others' suggestions, and view the live voting.
 
 
 > [!NOTE]
@@ -18,19 +18,20 @@ A brief description of the application here. Lorem ipsum dolor sit amet, consect
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [x] Proper use of Markdown
+- [x] A concise and compelling elevator pitch
+- [x] Description of key features
+- [x] Description of how you will use each technology
+- [x] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Tired of listening to the same music on repeat? Or frustrated when your music suggestions get ignored? With Bop Ballot, you can make song suggestions, vote on others' suggestions, and view the live voting results all in one place. It's the easiest way to share your favorite music, discover new songs, and create the ultimate crowd-approved playlist.
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image: home page and add suggestion screen](https://drive.google.com/file/d/194GqRwwbE5OAIJyPF6bFJb986lc-sVsL/view?usp=sharing)
+![Design image: voting screen and vote results screen](https://drive.google.com/file/d/12jP57wVuohKXpqyctAPIfCsyFvwLvD5H/view?usp=sharing)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
@@ -43,20 +44,27 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Login to keep your suggestions tied to your account
+- Make song suggestions by searching for them using the iTunes Search API
+- Add votes to others' suggestions
+- Play short previews of songs directly in the app
+- View real-time updates on which songs have the most votes
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - HTML pages for login, song search, suggestion list, and voting results
+- **CSS** - Consistent and aesthetic color choice and styling throughout the app. Simple and straightforward user interface design.
+- **React** - Uses login form, song search, voting, and displaying votes.
+- **Service** - Backend service endpoints:
+                - login
+                - adding a song suggestion
+                - submitting song votes
+                - retrieving votes
+                - Third-party call to iTunes Search API to get song data
+- **DB/Login** - Store users, song suggestions, and song vote counts, user votes so that there isn't duplicate voting
+- **WebSocket** - Every vote for a song updates the list in real time and broadcast to other users.
 
 ## 🚀 AWS deliverable
 
