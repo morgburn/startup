@@ -57,12 +57,11 @@ I am going to use the required technologies in the following ways.
 - **DB/Login** - Store users, song suggestions, and song vote counts, user votes so that there isn't duplicate voting
 - **WebSocket** - Every vote for a song updates the list in real time and broadcast to other users.
 
-```
 ## 🚀 AWS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
 
 ## 🚀 HTML deliverable
 
@@ -78,6 +77,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] **DB data placeholder** - I did not complete this part of the deliverable.
 - [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
 
+```
 ## 🚀 CSS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
