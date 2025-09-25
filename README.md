@@ -71,11 +71,11 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Proper HTML element usage** - I used many HTML elements such as <head>, <nav>, <menu>, <li>, <a>, <form>, <label>, <input>, <table>, <img>, <span>, <button>, and more basic HTML elements.
 - [x] **Links** - Each page has a menu at the top with links to direct you to any of the other pages. I also included a link in the footer of each page with my GitHub repo.
 - [x] **Text** - Each page has text titles, there are labels for text entries and buttons, there are text descriptions for the song titles and artists and the results table has text entries.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **3rd party API placeholder** - I have a placeholder for the iTunes API on my suggest.html page and have a placeholder demonstrating sample results from the API.
+- [x] **Images** - The song placeholders use images as album covers on the suggest.html and vote.html pages.
+- [x] **Login placeholder** - There is a login placeholder on the homepage (index.html).
+- [x] **DB data placeholder** - The table in scores.html represents where song suggestions and song vote numbers will be pulled and displayed from the database.
+- [x] **WebSocket placeholder** - The vote counts update automatically on scores.html when people click on the heart buttons on vote.html. The vote.html will update with new songs immediately after someone has used suggest.html to suggest a new song.
 
 ```
 ## 🚀 CSS deliverable
