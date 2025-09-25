@@ -61,16 +61,16 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [x] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://boppitybop260.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - 4 html pages for login(index.html), making song suggestions(suggest.html), voting(vote.html), and voting results(scores.html).
+- [x] **Proper HTML element usage** - I used many HTML elements such as <head>, <nav>, <menu>, <li>, <a>, <form>, <label>, <input>, <table>, <img>, <span>, <button>, and more basic HTML elements.
+- [x] **Links** - Each page has a menu at the top with links to direct you to any of the other pages. I also included a link in the footer of each page with my GitHub repo.
+- [x] **Text** - Each page has text titles, there are labels for text entries and buttons, there are text descriptions for the song titles and artists and the results table has text entries.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
 - [ ] **Login placeholder** - I did not complete this part of the deliverable.
