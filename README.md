@@ -68,7 +68,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **HTML pages** - 4 html pages for login(index.html), making song suggestions(suggest.html), voting(vote.html), and voting results(scores.html).
-- [x] **Proper HTML element usage** - I used many HTML elements such as <head>, <nav>, <menu>, <li>, <a>, <form>, <label>, <input>, <table>, <img>, <span>, <button>, and more basic HTML elements.
+- [x] **Proper HTML element usage** - I used many HTML elements such as head, nav, menu, li, a, form, label, input, table, img, span, button, and more basic HTML elements.
 - [x] **Links** - Each page has a menu at the top with links to direct you to any of the other pages. I also included a link in the footer of each page with my GitHub repo.
 - [x] **Text** - Each page has text titles, there are labels for text entries and buttons, there are text descriptions for the song titles and artists and the results table has text entries.
 - [x] **3rd party API placeholder** - I have a placeholder for the iTunes API on my suggest.html page and have a placeholder demonstrating sample results from the API.
