@@ -14,3 +14,23 @@
     margin: 1em;
     padding: 1em;
 }
+
+.song-text {
+    margin-left: 1em;
+    flex: 1;
+}
+
+.song-suggestion button {
+    background: none;
+    border: none;
+    font-size: 2em;
+    cursor: pointer;
+}
+
+.song-suggestion button:hover {
+    color: gray;
+}
+
+.song-suggestion button.liked {
+    color: rgb(219, 4, 76);
+}
