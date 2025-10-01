@@ -1,5 +1,13 @@
 body {
+    font-family: "Verdana", sans-serif;
     display: flex;
     flex-direction: column;
     min-width: 375px;
+    background-color: aliceblue;
+    color: rgb(31, 31, 31);
+}
+
+header {
+    background-color: rgb(184, 222, 255);
+    padding: 1em;
 }
