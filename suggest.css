@@ -15,10 +15,23 @@
     font-size: 1em;
 }
 
+.suggest-button :hover {
+    background-color: rgb(81, 146, 202);
+    color: white;
+}
+
 .search-results {
     display: flex;
     align-items: center;
     width: 600px;
     background-color: rgb(81, 146, 202);
     margin: 1em;
+}
+
+table {
+    width: 60%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
 }
