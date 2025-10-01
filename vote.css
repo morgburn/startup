@@ -1,6 +1,16 @@
 .song-list {
     display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.song-suggestion {
+    display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 600px;
+    background-color: rgb(217, 223, 229);
+    border-radius: 15px;
+    margin: 1em;
     padding: 1em;
 }
