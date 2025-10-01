@@ -4,7 +4,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: aliceblue;
-    color: rgb(31, 31, 31);
+    color: rgb(49, 49, 49);
 }
 
 h1 {
@@ -33,12 +33,34 @@ menu li a {
     color: rgb(99, 99, 99);
 }
 
+menu li a:hover {
+    color: rgb(255, 255, 255);
+}
+
 main {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex: 1;
     padding: 1em;
     align-items: center;
+}
+
+.login-form {
+    background: #fff;
+    padding: 2em;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.login-form input {
+    padding: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
 }
 
 footer {
