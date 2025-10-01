@@ -15,20 +15,27 @@
     font-size: 1em;
 }
 
+.suggest-button:hover {
+    background-color: rgb(81, 146, 202);
+}
+
 .search-results {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 600px;
-    background-color: gray;
+    background-color: rgb(217, 223, 229);
     border-radius: 15px;
     margin: 1em;
     padding: 1em;
 }
 
-table {
-    width: 60%;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    text-align: left;
+.song-text {
+    margin-left: 1em;
+    flex: 1;
+}
+
+.suggest-button {
+    margin-left: 1em;
+    padding: 0.5em 1em;
 }
