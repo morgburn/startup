@@ -63,6 +63,10 @@ main {
     font-size: 1em;
 }
 
+.login-form input:hover {
+    background-color:rgb(164, 164, 164);
+}
+
 footer {
     background-color: rgb(217, 223, 229);
     padding: 1em;

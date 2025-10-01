@@ -15,8 +15,8 @@
     font-size: 1em;
 }
 
-.suggest-button:hover {
-    background-color: rgb(81, 146, 202);
+.search-bar input:hover {
+    background-color: rgb(164, 164, 164);
 }
 
 .search-results {
@@ -38,4 +38,8 @@
 .suggest-button {
     margin-left: 1em;
     padding: 0.5em 1em;
+}
+
+.suggest-button:hover {
+    background-color: rgb(81, 146, 202);
 }
