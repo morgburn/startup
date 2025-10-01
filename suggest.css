@@ -1,12 +1,16 @@
 .search-bar {
     display: flex;
+    align-items: center;
     max-width: 600px;
     margin: 1em;
+    background-color: #fff;
+    border-radius: 25px;
+    padding: 1.5em;
 }
 
 .search-bar input {
-    flex: 1;
     padding: 0.5em;
-    border: 1px solid rgb(91, 91, 91);
-    border-radius: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
 }
