@@ -77,18 +77,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **DB data placeholder** - The table in scores.html represents where song suggestions and song vote numbers will be pulled and displayed from the database.
 - [x] **WebSocket placeholder** - The vote counts update automatically on scores.html when people click on the heart buttons on vote.html. The vote.html will update with new songs immediately after someone has used suggest.html to suggest a new song.
 
-```
 ## 🚀 CSS deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - My main.css includes styling for the header, footer, and main content across all html pages.
+- [x] **Navigation elements** - I made the navigation elements/menu in a line across the top right of the page in the header.
+- [x] **Responsive to window resizing** - I used display: flex to get my application adjust to different window sizes.
+- [x] **Application elements** - Centering the main content on every page, using lots of whitespace, styling to make tables/shapes distinct. 
+- [x] **Application text content** - Consistent font use
+- [x] **Application images** - I liked the size that my images were already, but I adjust the spacing and placement of them with the text.
 
+```
 ## 🚀 React part 1: Routing deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
