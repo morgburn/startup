@@ -14,10 +14,10 @@ export default function App() {
           <h1>Bop Ballot</h1>
           <nav>
               <menu>
-                  <li><a href="index.html">Home</a></li>
-                  <li><a href="suggest.html">Make a Song Suggestion</a></li>
-                  <li><a href="vote.html">Vote</a></li>
-                  <li><a href="scores.html">View Top Suggestions</a></li>
+                  <li><NavLink to="">Login</NavLink></li>
+                  <li><NavLink to="suggest">Make a Song Suggestion</NavLink></li>
+                  <li><NavLink to="vote">Vote</NavLink></li>
+                  <li><NavLink to="scores">View Top Suggestions</NavLink></li>
               </menu>
           </nav>
       </header>
