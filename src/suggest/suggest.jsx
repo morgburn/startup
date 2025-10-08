@@ -1,4 +1,5 @@
 import React from 'react';
+import './suggest.css';
 
 export function Suggest() {
   return (

@@ -1,9 +1,23 @@
 import React from 'react';
+import './vote.css';
 
 export function Vote() {
   return (
-    <main className="container-fluid bg-secondary text-center">
-      <div>vote displayed here</div>
-    </main>
+        <main>
+            <h2>Vote on Song Suggestions</h2>
+            <div className="song-list">
+                <div className="song-suggestion">
+                    <img src="/images/album_cover.png" alt="Album Cover Placeholder" width="60" />
+                    <span className="song-text">Golden - Huntrix</span>
+                    <button>❤</button>
+                </div>
+
+                <div className="song-suggestion">
+                    <img src="/images/album_cover_2.png" alt="Album Cover Placeholder" width="60" />
+                    <span className="song-text">I Hear A Symphony - Cody Fry</span>
+                    <button>❤</button>
+                </div>
+            </div>
+        </main>
   );
 }
