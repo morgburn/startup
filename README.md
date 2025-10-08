@@ -88,15 +88,15 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Application text content** - Consistent font use
 - [x] **Application images** - I liked the size that my images were already, but I adjust the spacing and placement of them with the text.
 
-```
 ## 🚀 React part 1: Routing deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - Routing between login and voting components.
+- [x] **Bundled using Vite** - I replaced the "scripts" section in package.json with the commands for running Vite.
+- [x] **Components** - I created an app.jsx file, and a jsx file for login, suggest, vote, and scores pages.
+- [x] **Router** - Routing between login, suggest, voting, and scores components.
 
+```
 ## 🚀 React part 2: Reactivity
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
