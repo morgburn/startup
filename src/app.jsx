@@ -22,7 +22,13 @@ export default function App() {
           </nav>
       </header>
       
-      <main>App components go here</main>
+      <Routes>
+        <Route path='/' element={<Login />} exact />
+        <Route path='/suggest' element={<Suggest />} />
+        <Route path='/scores' element={<Scores />} />
+        <Route path='/vote' element={<Vote />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
       
       <footer>
               <p>Morgan Burnside</p>
@@ -30,4 +36,8 @@ export default function App() {
           </footer></>
     </BrowserRouter>
   )
+}
+
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
