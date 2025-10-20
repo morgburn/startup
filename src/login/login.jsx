@@ -1,23 +1,21 @@
 import React from 'react';
+import { Unauthenticated } from './unauthenticated';
+import { Authenticated } from './authenticated';
 
 export function Login() {
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
+  function handleLogin(newUserName) {
+    setUserName(newUserName);
+    localStorage.setItem('userName', newUserName);
+  }
+
   return (
     <main>
-      <form className="login-form" method="get" action="vote.html">
-        <h2>Login</h2>
-        <div>
-          <label>Name:</label>
-          <input type="text" placeholder="Your Name" />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input type="text" placeholder="password" />
-        </div>
-        <div className="buttons">
-          <input type="button" value="Create" />
-          <input type="button" value="Login" />
-        </div>
-      </form>
+      {userName ? (
+        <Authenticated userName={userName} />
+      ) : (
+        <Unauthenticated onLogin={handleLogin} />
+      )}
     </main>
   );
 }
