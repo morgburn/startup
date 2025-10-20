@@ -8,13 +8,11 @@ export function Unauthenticated({ onLogin }) {
             return;
         }
 
-        localStorage.setItem('userName', userName);
         onLogin(userName);
     }
 
-      return (
-    <main>
-      <form className="login-form" method="get" action="vote.html">
+    return (
+      <form className="login-form" method="get">
         <h2>Login</h2>
         <div>
           <label>Name:</label>
@@ -25,14 +23,13 @@ export function Unauthenticated({ onLogin }) {
           <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
         </div>
         <div className="buttons">
-            <button type="button" onClick={loginUser} disabled={!userName || !password}>
+            <button type="button" onClick={loginUser}>
                 Login
             </button>
-            <button type="button" onClick={loginUser} disabled={!userName || !password}>
+            <button type="button" onClick={loginUser}>
                 Create
             </button>
         </div>
       </form>
-    </main>
   );
 }

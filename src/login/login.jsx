@@ -4,6 +4,7 @@ import { Authenticated } from './authenticated';
 
 export function Login() {
   const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
+  
   function handleLogin(newUserName) {
     setUserName(newUserName);
     localStorage.setItem('userName', newUserName);
