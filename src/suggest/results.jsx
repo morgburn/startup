@@ -9,9 +9,9 @@ export function SongResults({ songs }) {
         <div className="search-results">
             {songs.map((song, index) => (
                 <div key={index} className="result-item">
-                    <img src={song.albumCover} alt={song.name} width="60" />
+                    <img src={song.albumCover} alt={song.trackName} width="60" />
                     <span classname="song-text">
-                        {song.name} - (song.artist)
+                        {song.trackname} - (song.artist)
                     </span>
                     <button className="suggest-button">Suggest</button>
                 </div>
