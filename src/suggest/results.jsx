@@ -11,7 +11,7 @@ export function SongResults({ songs }) {
                 <div key={index} className="result-item">
                     <img src={song.albumCover} alt={song.trackName} width="60" />
                     <span classname="song-text">
-                        {song.trackname} - (song.artist)
+                        {song.trackName} - {song.artist}
                     </span>
                     <button className="suggest-button">Suggest</button>
                 </div>
