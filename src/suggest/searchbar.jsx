@@ -7,4 +7,13 @@ export function SearchBar({ onSearch }) {
         e.preventDefault();
         onSearch(query);
     }
+
+
+    return (
+        <form className="search-bar" onSubmit={handleSubmit}>
+            <label>Search song title or artist:</label>
+            <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="e.g. Huntrix Golden"/>
+            <button type="submit">Search</button>
+        </form>
+    );
 }
