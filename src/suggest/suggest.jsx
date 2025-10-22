@@ -5,6 +5,9 @@ import { SongResults } from './results';
 
 export function Suggest() {
     const [songs, setSongs] = React.useState([]);
+    const [suggestedSongs, setSuggestedSongs] = React.useState(
+        JSON.parse(localStorage.getItem('suggestedSongs')) || []
+    );
 
     function songResults(term) {
         return [
@@ -22,12 +25,20 @@ export function Suggest() {
         setSongs(results);
     }
 
+    function handleSuggest(song) {
+        if (suggestedSongs.some(s => s.trackname === song.trackName)) return;
+
+        const updated = [...suggestedSongs, song];
+        setSuggestedSongs(updated);
+        localStorage.setItem('suggestedSongs', JSON.stringify(updated));
+    }
+
     return (
         <main>
             <h2>Song Suggestions</h2>
             <h4>Powered by iTunes API</h4>
             <SearchBar onSearch={handleSearch} />
-            <SongResults songs={songs} />
+            <SongResults songs={songs} suggestedSongs={suggestedSongs} onSuggest={handleSuggest} />
         </main>
     );
 }
