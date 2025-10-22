@@ -1,15 +1,15 @@
 import React from 'react';
-import { voteItem } from './voteItem';
+import { VoteItem } from './voteItem';
 
-export function voteList({ songs, voted, onVote }) {
+export function VoteList({ songs, voted, onVote }) {
     if (songs.length === 0) {
         return <p>No songs suggested yet.</p>;
     }
-    
+
     return (
         <div className="vote-list">
             {songs.map(song => (
-                <voteItem key={song.id} song={song} isVoted={voted.includes(song.id)} onVote={() => onVote(song.id)} />
+                <VoteItem key={song.id} song={song} isVoted={voted.includes(song.id)} onVote={() => onVote(song.id)} />
             ))}
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import './vote.css';
-import { voteList } from './voteList';
+import { VoteList } from './voteList';
 
 export function Vote() {
     const [songs, setSongs] = React.useState([
@@ -21,7 +21,7 @@ export function Vote() {
     return (
         <main>
             <h2>Vote on Song Suggestions</h2>
-            <voteList songs={songs} voted={voted} onVote={handleVote} />
+            <VoteList songs={songs} voted={voted} onVote={handleVote} />
         </main>
   );
 }

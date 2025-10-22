@@ -1,9 +1,9 @@
 import React from 'react';
 
-export function voteItem({ song, isVoted, onVote }) {
+export function VoteItem({ song, isVoted, onVote }) {
     return (
-        <div className="vote-item">
-            <span className="song-info">
+        <div className="song-suggestion">
+            <span className="song-text">
                 {song.trackName} - {song.artist}
             </span>
             <button className={`heart-button ${isVoted ? 'voted' : ''}`} onClick={onVote}>❤️</button>
