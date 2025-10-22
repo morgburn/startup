@@ -96,7 +96,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Components** - I created an app.jsx file, and a jsx file for login, suggest, vote, and scores pages.
 - [x] **Router** - Routing between login, suggest, voting, and scores components.
 
-```
+
 ## 🚀 React part 2: Reactivity
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
@@ -104,6 +104,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
 - [ ] **Hooks** - I did not complete this part of the deliverable.
 
+```
 ## 🚀 Service deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
