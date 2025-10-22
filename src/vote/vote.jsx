@@ -1,5 +1,6 @@
 import React from 'react';
 import './vote.css';
+import {voteList } from './voteList';
 
 export function Vote() {
   return (
