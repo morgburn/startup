@@ -8,13 +8,13 @@ export function Vote() {
 
     React.useEffect(() => {
         const stored = JSON.parse(localStorage.getItem('suggestedSongs')) || [];
+        setSongs(stored);
     }, []);
 
-    function handleVote(songId) {
+    function handleVote(trackName) {
         const updated = songs.map(song => {
-            if (song.trackname === songId) {
-                const newVotes = song.votes ? song.votes + 1 : 1;
-                return { ...song, votes: newVotes };
+            if (song.trackName === trackName) {
+                return { ...song, votes: (song.votes || 0) + 1 };
             }
             return song;
         });
@@ -22,7 +22,7 @@ export function Vote() {
         localStorage.setItem('suggestedSongs', JSON.stringify(updated));
 
         setVoted(previousState =>
-            previousState.includes(songId) ? previousState.filter(id => id !== songId) : [...previousState, songId]
+            previousState.includes(trackName) ? previousState.filter(id => id !== trackName) : [...previousState, trackName]
         );
     }
   

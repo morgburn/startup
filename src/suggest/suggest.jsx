@@ -27,7 +27,8 @@ export function Suggest() {
     function handleSuggest(song) {
         if (suggestedSongs.some(s => s.trackName === song.trackName)) return;
 
-        const updated = [...suggestedSongs, { ...song, votes: 0}];
+        const newSong = { ...song, votes: 0 };
+        const updated = [...suggestedSongs, newSong];
         setSuggestedSongs(updated);
         localStorage.setItem('suggestedSongs', JSON.stringify(updated));
     }

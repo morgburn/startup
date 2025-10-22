@@ -15,18 +15,6 @@ export function Scores() {
         }
     }, []);
 
-    const scoreRows = scores.length ? scores.map((score, i) => (
-        <tr key={(score.id)}>
-            <td>{i + 1}</td>
-            <td>{score.name}</td>
-            <td>{score.score}</td>
-        </tr>
-    )) : (
-        <tr key="0">
-          <td colSpan="4">No votes yet</td>
-        </tr>
-    );
-
   return (
         <main>
             <h2>Top Suggestions</h2>
@@ -39,7 +27,22 @@ export function Scores() {
                     <th>Votes</th>
                 </tr>
                 </thead>
-                <tbody>{scoreRows}</tbody>
+                <tbody>
+                    {scores.length > 0 ? (
+                        scores.map((song, index) => (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{song.trackName}</td>
+                                <td>{song.artist}</td>
+                                <td>{song.votes}</td>
+                            </tr>
+                        ))
+                    ) : (
+                        <tr>
+                            <td colSpan="4">No votes yet</td>
+                        </tr>
+                    )}
+                </tbody>
             </table>
         </main>
   );
