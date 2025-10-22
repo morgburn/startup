@@ -9,7 +9,7 @@ export function VoteList({ songs, voted, onVote }) {
     return (
         <div className="vote-list">
             {songs.map(song => (
-                <VoteItem key={song.id} song={song} isVoted={voted.includes(song.id)} onVote={() => onVote(song.id)} />
+                <VoteItem key={song.trackName} song={song} isVoted={voted.includes(song.trackName)} onVote={() => onVote(song.trackName)} />
             ))}
         </div>
     );
