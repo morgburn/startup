@@ -2,6 +2,10 @@ import React from 'react';
 import { voteItem } from './voteItem';
 
 export function voteList({ songs, voted, onVote }) {
+    if (songs.length === 0) {
+        return <p>No songs suggested yet.</p>;
+    }
+    
     return (
         <div className="vote-list">
             {songs.map(song => (

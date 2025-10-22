@@ -11,8 +11,8 @@ export function Suggest() {
 
     function songResults(term) {
         return [
-            { trackName: 'Golden', artist: 'Huntrix', albumCover: 'images/album_cover.png'},
-            { trackName: `${term}`, artist: 'Artist', albumCover: 'images/album_cover_2.png'},
+            { trackName: `${term}`, artist: 'Artist 1', albumCover: 'images/album_cover.png'},
+            { trackName: `${term}`, artist: 'Artist 2', albumCover: 'images/album_cover_2.png'},
         ].filter(song => song.trackName.toLowerCase().includes(term.toLowerCase()));
     }
 

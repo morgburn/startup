@@ -11,7 +11,7 @@ export function SearchBar({ onSearch }) {
 
     return (
         <form className="search-bar" onSubmit={handleSubmit}>
-            <label>Search song title or artist:</label>
+            <label>Search song title:</label>
             <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="e.g. Golden"/>
             <button type="submit">Search</button>
         </form>
