@@ -5,16 +5,13 @@ export function Scores() {
     const [scores, setScores] = React.useState([]);
 
     React.useEffect(() => {
-        const scoresText = localStorage.getItem('suggestedSongs');
-        if (scoresText) {
-            const songs = JSON.parse(scoresText);
-            const scoreData = songs.map((song, index) => ({
-                id: index + 1,
-                name: song.trackName,
-                scores: song.votes || 0,
-            }));
-            scoreData.sort((a, b) => b.score - a.score);
-            setScores(scoreData);
+        const stored = localStorage.getItem('suggestedSongs');
+        if (stored) {
+            const songs = JSON.parse(stored);
+            const sorted = songs
+                .filter(song => song.votes && song.votes > 0)
+                .sort((a, b) => b.votes - a.votes);
+            setScores(sorted);
         }
     }, []);
 

@@ -3,18 +3,26 @@ import './vote.css';
 import { VoteList } from './voteList';
 
 export function Vote() {
-    const [songs, setSongs] = React.useState([
-        { id: 1, trackName: 'Song Mockup', artist: 'Artist Mockup'},
-        { id: 2, trackName: 'Another Song Name', artist: 'Example Artist'},
-    ]);
-
+    const [songs, setSongs] = React.useState([]);
     const [voted, setVoted] = React.useState([]);
 
+    React.useEffect(() => {
+        const stored = JSON.parse(localStorage.getItem('suggestedSongs')) || [];
+    }, []);
+
     function handleVote(songId) {
-        setVoted((currentState) =>
-            currentState.includes(songId)
-                ? currentState.filter((id) => id !== songId)
-                : [...currentState, songId]
+        const updated = songs.map(song => {
+            if (song.trackname === songId) {
+                const newVotes = song.votes ? song.votes + 1 : 1;
+                return { ...song, votes: newVotes };
+            }
+            return song;
+        });
+        setSongs(updated);
+        localStorage.setItem('suggestedSongs', JSON.stringify(updated));
+
+        setVoted(previousState =>
+            previousState.includes(songId) ? previousState.filter(id => id !== songId) : [...previousState, songId]
         );
     }
   
