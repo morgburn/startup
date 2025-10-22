@@ -11,12 +11,13 @@ export function SongResults({ songs, onSuggest, suggestedSongs }) {
                 );
 
                 return (
-                    <div key={index} className="result-item">
+                    <div key={song.trackName} className="result-item">
                         <img src={song.albumCover} alt={song.trackName} width="60" />
                         <span className="song-text">
                             {song.trackName} - {song.artist}
                         </span>
                         <button
+                            className="suggest-button"
                             onClick={() => onSuggest(song)}
                             disabled={alreadySuggested}
                         >
