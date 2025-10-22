@@ -2,6 +2,34 @@ import React from 'react';
 import './scores.css';
 
 export function Scores() {
+    const [scores, setScores] = React.useState([]);
+
+    React.useEffect(() => {
+        const scoresText = localStorage.getItem('suggestedSongs');
+        if (scoresText) {
+            const songs = JSON.parse(scoresText);
+            const scoreData = songs.map((song, index) => ({
+                id: index + 1,
+                name: song.trackName,
+                scores: song.votes || 0,
+            }));
+            scoreData.sort((a, b) => b.score - a.score);
+            setScores(scoreData);
+        }
+    }, []);
+
+    const scoreRows = scores.length ? scores.map((score, i) => (
+        <tr key={(score.id)}>
+            <td>{i + 1}</td>
+            <td>{score.name}</td>
+            <td>{score.score}</td>
+        </tr>
+    )) : (
+        <tr key="0">
+          <td colSpan="4">No votes yet</td>
+        </tr>
+    );
+
   return (
         <main>
             <h2>Top Suggestions</h2>
@@ -14,26 +42,7 @@ export function Scores() {
                     <th>Votes</th>
                 </tr>
                 </thead>
-                <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Golden</td>
-                    <td>Huntrix</td>
-                    <td>❤12</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>I Hear A Symphony</td>
-                    <td>Cody Fry</td>
-                    <td>❤7</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Butter</td>
-                    <td>BTS</td>
-                    <td>❤5</td>
-                </tr>
-                </tbody>
+                <tbody>{scoreRows}</tbody>
             </table>
         </main>
   );
