@@ -102,7 +102,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [x] **All functionality implemented or mocked out** - I implemented the login features of the login page. I mocked out the suggest page so that you can search for a song title and suggest it. This is just a mockup for now because I'll be implementing the itunes API search later. The songs that are "suggested" carry over to the voting page where users can click on the heart to add their vote to the song. I also implemented the scores page so that it correctly displays the song names with the most votes/likes.
-- [ ] **Hooks** - I used useState and useEffect on several pages to manage and store the data that the user provides.
+- [x] **Hooks** - I used useState and useEffect on several pages to manage and store the data that the user provides.
 
 ```
 ## 🚀 Service deliverable
