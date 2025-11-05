@@ -82,7 +82,7 @@ apiRouter.post('/song', verifyAuth, (req, res) => {
   const newSong = {
     title: req.body.title,
     artist: req.body.artist,
-    suggestedBy: req.body.suggestedBy,
+    suggestedBy: user ? user.email : 'Anonymous',
     date: new Date().toLocaleDateString(),
   };
 
