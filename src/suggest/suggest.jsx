@@ -8,20 +8,32 @@ export function Suggest() {
     const [suggestedSongs, setSuggestedSongs] = React.useState(
         JSON.parse(localStorage.getItem('suggestedSongs')) || []
     );
+    const [loading, setLoading] = React.useState(false);
 
-    function songResults(term) {
-        return [
-            { trackName: `${term}`, artist: 'Artist 1', albumCover: 'images/album_cover.png'},
-        ].filter(song => song.trackName.toLowerCase().includes(term.toLowerCase()));
-    }
-
-    function handleSearch(term) {
+    async function handleSearch(term) {
         if (!term) {
             alert('Please enter a search term');
             return;
         }
-        const results = songResults(term);
-        setSongs(results);
+
+        setLoading(true);
+        try {
+            const response = await fetch(
+                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&limit=10`
+            );
+            const data = await response.json();
+            const results = data.results.map((song) => ({
+                trackName: song.trackName,
+                artist: song.artistName,
+                albumCover: song.artworkUrl100,
+            }));
+            setSongs(results);
+        } catch (error) {
+            console.error('iTunes API error:', error);
+            alert('Failed to fetch songs from iTunes');
+        } finally {
+            setLoading(false);
+        }
     }
 
     function handleSuggest(song) {
