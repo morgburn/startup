@@ -72,6 +72,26 @@ apiRouter.post('/score', verifyAuth, (req, res) => {
   res.send(scores);
 });
 
+// Get all song suggestions (restricted)
+apiRouter.get('/songs', verifyAuth, (_req, res) => {
+  res.send(songs);
+});
+
+// Submit a new song suggestion (restricted)
+apiRouter.post('/song', verifyAuth, (req, res) => {
+  const newSong = {
+    title: req.body.title,
+    artist: req.body.artist,
+    suggestedBy: req.body.suggestedBy,
+    date: new Date().toLocaleDateString(),
+  };
+
+  songs.unshift(newSong);
+  if (songs.length > 20) songs.length = 20;
+
+  res.send(songs);
+});
+
 // updateScores, keep only the top 10
 function updateScores(newScore) {
   let found = false;
