@@ -5,10 +5,21 @@ import { SongResults } from './results';
 
 export function Suggest() {
     const [songs, setSongs] = React.useState([]);
-    const [suggestedSongs, setSuggestedSongs] = React.useState(
-        JSON.parse(localStorage.getItem('suggestedSongs')) || []
-    );
+    const [suggestedSongs, setSuggestedSongs] = React.useState([]);
     const [loading, setLoading] = React.useState(false);
+
+    React.useEffect(() => {
+        async function fetchSuggestedSongs() {
+            try {
+                const response = await fetch('/api/songs');
+                const data = await response.json();
+                setSuggestedSongs(data);
+            } catch (err) {
+                console.error('Failed to load suggested songs', err);
+            }
+        }
+        fetchSuggestedSongs();
+    }, []);
 
     async function handleSearch(term) {
         if (!term) {
@@ -43,7 +54,7 @@ export function Suggest() {
         const newSong = { 
         trackName: song.trackName,
         artist: song.artist,
-        albumCover: song.albumCover, // this is now from iTunes
+        albumCover: song.albumCover,
         votes: 0
         };
         const updated = [...suggestedSongs, newSong];
