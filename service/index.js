@@ -2,7 +2,6 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
-const path = require('path');
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -15,30 +14,38 @@ let users = [];
 let songs = [];
 let scores = [];
 
-var apiRouter = express.Router();
+function setAuthCookie(res, token) {
+  res.cookie(authCookieName, token, {
+    httpOnly: true,
+    secure: false,
+    sameSite: 'lax',
+  });
+}
+
+const apiRouter = express.Router();
 app.use(`/api`, apiRouter);
 
 // CreateAuth - register a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  if (await findUser('email', req.body.email)) {
-    res.status(409).send({ msg: 'Existing user' });
-  } else {
-    const user = await createUser(req.body.email, req.body.password);
-    setAuthCookie(res, user.token);
-    res.send({ email: user.email });
+  const { userName, password } = req.body;
+  if (await findUser('userName', userName)) {
+    return res.status(409).send({ msg: 'Existing user' });
   }
+  const user = await createUser(userName, password);
+  setAuthCookie(res, user.token);
+  res.send({ userName: user.userName });
 });
 
 // GetAuth - log in existing user
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = await findUser('email', req.body.email);
-  if (user && (await bcrypt.compare(req.body.password, user.password))) {
+  const { userName, password } = req.body;
+  const user = await findUser('userName', userName);
+  if (user && (await bcrypt.compare(password, user.password))) {
     user.token = uuid.v4();
     setAuthCookie(res, user.token);
-    res.send({ email: user.email });
-  } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+    return res.send({ userName: user.userName });
   }
+  res.status(401).send({ msg: 'Unauthorized' });
 });
 
 // DeleteAuth - log out user
@@ -82,7 +89,6 @@ apiRouter.post('/song', verifyAuth, (req, res) => {
   const newSong = {
     title: req.body.title,
     artist: req.body.artist,
-    suggestedBy: user ? user.email : 'Anonymous',
     date: new Date().toLocaleDateString(),
   };
 
@@ -114,14 +120,10 @@ function updateScores(newScore) {
   return scores;
 }
 
-async function createUser(email, password) {
+async function createUser(userName, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
-  const user = {
-    email: email,
-    password: passwordHash,
-    token: uuid.v4(),
-  };
+  const user = { userName, password: passwordHash, token: uuid.v4() };
   users.push(user);
 
   return user;

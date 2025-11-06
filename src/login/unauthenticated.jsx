@@ -3,37 +3,35 @@ import React from 'react';
 export function Unauthenticated({ onLogin }) {
     const [userName, setUserName] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [error, setError] = React.useState('');
 
-    async function loginUser() {
-        if (!userName || !password) {
-            alert('Please enter a username and password');
-            return;
-        }
+  async function loginOrCreate(endpoint) {
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userName, password }),
+      });
 
-        try {
-            const response = await fetch('/api/auth/login', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email: userName, password }),
-            });
-
-            if (response.ok) {
-              const user = await response.json();
-              localStorage.setItem('userName', user.email);
-              onLogin(user.email);
-            } else {
-              alert('User already exists');
-            }
-          } catch (err) {
-            console.error('Create error:', err);
-            alert('Error connecting to server');
-          }
-        }
+      if (response.ok) {
+        const user = await response.json();
+        localStorage.setItem('userName', user.userName);
+        onLogin(user.userName);
+      } else {
+        const body = await response.json();
+        setError(body.msg || 'Unknown error');
+      }
+    } catch (err) {
+      console.error(err);
+      setError('Network or server error');
+    }
+  }
 
 
   return (
     <form className="login-form" onSubmit={(e) => e.preventDefault()}>
       <h2>Login or Create Account</h2>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
       <div>
         <label>Name:</label>
         <input
@@ -53,10 +51,18 @@ export function Unauthenticated({ onLogin }) {
         />
       </div>
       <div className="buttons">
-        <button type="button" onClick={loginUser}>
+        <button
+          type="button"
+          onClick={() => loginOrCreate('/api/auth/login')}
+          disabled={!userName || !password}
+        >
           Login
         </button>
-        <button type="button" onClick={createUser}>
+        <button
+          type="button"
+          onClick={() => loginOrCreate('/api/auth/create')}
+          disabled={!userName || !password}
+        >
           Create
         </button>
       </div>

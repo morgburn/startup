@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function Authenticated({userName}) {
+export function Authenticated({userName, onLogout}) {
   async function handleLogout() {
     try {
       await fetch('/api/auth/logout', {
@@ -9,15 +9,15 @@ export function Authenticated({userName}) {
     } catch (err) {
       console.error('Logout failed:', err);
     } finally {
-      localStorage.removeItem('userName');
       onLogout();
     }
   }
 
 
-    return (
-        <main className="welcome">
-            <h2>Welcome, {userName}!</h2>
-        </main>
-    );
+  return (
+    <main className="welcome">
+      <h2>Welcome, {userName}!</h2>
+      <button onClick={handleLogout}>Logout</button>
+    </main>
+  );
 }
