@@ -104,17 +104,18 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **All functionality implemented or mocked out** - I implemented the login features of the login page. I mocked out the suggest page so that you can search for a song title and suggest it. This is just a mockup for now because I'll be implementing the itunes API search later. The songs that are "suggested" carry over to the voting page where users can click on the heart to add their vote to the song. I also implemented the scores page so that it correctly displays the song names with the most votes/likes.
 - [x] **Hooks** - I used useState and useEffect on several pages to manage and store the data that the user provides.
 
-```
+
 ## 🚀 Service deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
+- [x] **Node.js/Express HTTP service** - Installed express with npm. Backend runs on port 4000.
+- [x] **Static middleware for frontend** - Endpoints in `service/index`.
+- [x] **Calls to third party endpoints** - Suggest.jsx now fetches song data from the iTunes API to display when someone searches for a song.
+- [x] **Backend service endpoints** - The backend has endpoints for retrieving song suggestions and submitting and retrieving the votes for the songs.
+- [x] **Frontend calls service endpoints** - The frontend now calls real backend endpoints which replaced the mocked functionality.
 
+```
 ## 🚀 DB/Login deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
