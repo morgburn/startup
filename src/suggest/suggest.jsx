@@ -48,19 +48,25 @@ export function Suggest() {
         }
     }
 
-    function handleSuggest(song) {
-        if (suggestedSongs.some(s => s.trackName === song.trackName)) return;
+    async function handleSuggest(song) {
+        try {
+        const response = await fetch('/api/song', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(song),
+        });
 
-        const newSong = { 
-        trackName: song.trackName,
-        artist: song.artist,
-        albumCover: song.albumCover,
-        votes: 0
-        };
-        const updated = [...suggestedSongs, newSong];
+        if (!response.ok) {
+            throw new Error('Failed to save song');
+        }
+
+        const updated = await response.json();
         setSuggestedSongs(updated);
-        localStorage.setItem('suggestedSongs', JSON.stringify(updated));
+    } catch (err) {
+        console.error('Error suggesting song:', err);
+        alert('Failed to save song');
     }
+}
 
     return (
         <main>
