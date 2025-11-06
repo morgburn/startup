@@ -18,8 +18,9 @@ export function Suggest() {
 
         setLoading(true);
         try {
+            setSongs([]);
             const response = await fetch(
-                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&limit=10`
+                `https://itunes.apple.com/search?term=${encodeURIComponent(term)}&entity=musicTrack&limit=20&country=US`
             );
             const data = await response.json();
             const results = data.results.map((song) => ({
@@ -39,7 +40,12 @@ export function Suggest() {
     function handleSuggest(song) {
         if (suggestedSongs.some(s => s.trackName === song.trackName)) return;
 
-        const newSong = { ...song, votes: 0 };
+        const newSong = { 
+        trackName: song.trackName,
+        artist: song.artist,
+        albumCover: song.albumCover, // this is now from iTunes
+        votes: 0
+        };
         const updated = [...suggestedSongs, newSong];
         setSuggestedSongs(updated);
         localStorage.setItem('suggestedSongs', JSON.stringify(updated));

@@ -72,12 +72,12 @@ apiRouter.post('/score', verifyAuth, (req, res) => {
   res.send(scores);
 });
 
-// Get all song suggestions (restricted)
+// Get all song suggestions
 apiRouter.get('/songs', verifyAuth, (_req, res) => {
   res.send(songs);
 });
 
-// Submit a new song suggestion (restricted)
+// Submit a new song suggestion
 apiRouter.post('/song', verifyAuth, (req, res) => {
   const newSong = {
     title: req.body.title,
