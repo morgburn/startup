@@ -82,15 +82,16 @@ apiRouter.post('/score', verifyAuth, (req, res) => {
 });
 
 // Get all song suggestions
-apiRouter.get('/songs', verifyAuth, (_req, res) => {
+apiRouter.get('/songs', (_req, res) => {
   res.send(songs);
 });
 
 // Submit a new song suggestion
-apiRouter.post('/song', verifyAuth, (req, res) => {
+apiRouter.post('/song', (req, res) => {
   const newSong = {
-    title: req.body.title,
+    trackName: req.body.trackName,
     artist: req.body.artist,
+    albumCover: req.body.albumCover,
     date: new Date().toLocaleDateString(),
   };
 
@@ -102,25 +103,22 @@ apiRouter.post('/song', verifyAuth, (req, res) => {
 
 // updateScores, keep only the top 10
 function updateScores(newScore) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
+  const existing = scores.find(
+    (s) => s.trackName === newScore.trackName && s.artist === newScore.artist
+  );
+
+  if (existing) {
+    existing.score += newScore.score;
+  } else {
+    scores.push({ ...newScore });
   }
 
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
+  scores.sort((a, b) => b.score - a.score);
+  if (scores.length > 10) scores.length = 10;
 
   return scores;
 }
+
 
 async function createUser(userName, password) {
   const passwordHash = await bcrypt.hash(password, 10);

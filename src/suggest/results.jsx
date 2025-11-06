@@ -7,7 +7,7 @@ export function SongResults({ songs, onSuggest, suggestedSongs }) {
         <div className="search-results">
             {songs.map((song, index) => {
                 const alreadySuggested = suggestedSongs.some(
-                    (s) => s.trackName === song.trackName
+                    (s) => s.trackName === song.trackName && s.artist === song.artist
                 );
 
                 return (

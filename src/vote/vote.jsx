@@ -7,8 +7,21 @@ export function Vote() {
     const [voted, setVoted] = React.useState([]);
 
     React.useEffect(() => {
-        const stored = JSON.parse(localStorage.getItem('suggestedSongs')) || [];
-        setSongs(stored);
+        async function fetchSongs() {
+            try {
+                const response = await fetch('/api/songs');
+                if (!response.ok) throw new Error('Failed to fetch songs');
+                const data = await response.json();
+                setSongs(data);
+            } catch (err) {
+                console.error('Error loading songs:', err);
+                // fallback to local storage in case backend is down
+                const stored = JSON.parse(localStorage.getItem('suggestedSongs')) || [];
+                setSongs(stored);
+            }
+        }
+
+        fetchSongs();
     }, []);
 
     function handleVote(trackName) {
@@ -21,15 +34,17 @@ export function Vote() {
         setSongs(updated);
         localStorage.setItem('suggestedSongs', JSON.stringify(updated));
 
-        setVoted(previousState =>
-            previousState.includes(trackName) ? previousState.filter(id => id !== trackName) : [...previousState, trackName]
+        setVoted(prev =>
+            prev.includes(trackName)
+                ? prev.filter(id => id !== trackName)
+                : [...prev, trackName]
         );
     }
-  
+
     return (
         <main>
             <h2>Vote on Song Suggestions</h2>
             <VoteList songs={songs} voted={voted} onVote={handleVote} />
         </main>
-  );
+    );
 }
