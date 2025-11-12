@@ -2,6 +2,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const uuid = require('uuid');
+const DB = require('./database.js');
 
 const app = express();
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -10,11 +11,6 @@ const authCookieName = 'token';
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.static('public'));
-
-
-let users = [];
-let songs = [];
-let scores = [];
 
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
@@ -45,6 +41,7 @@ apiRouter.post('/auth/login', async (req, res) => {
   const user = await findUser('userName', email);
   if (user && (await bcrypt.compare(password, user.password))) {
     user.token = uuid.v4();
+    await DB.updateUser(user);
     setAuthCookie(res, user.token);
     return res.send({ userName: user.userName });
   }
@@ -56,6 +53,7 @@ apiRouter.delete('/auth/logout', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
   if (user) {
     delete user.token;
+    await DB.updateUser(user);
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
@@ -72,23 +70,25 @@ const verifyAuth = async (req, res, next) => {
 };
 
 // GetScores
-apiRouter.get('/scores', verifyAuth, (_req, res) => {
+apiRouter.get('/scores', verifyAuth, async (req, res) => {
+  const scores = await DB.getHighScores();
   res.send(scores);
 });
 
 // SubmitScore
-apiRouter.post('/score', verifyAuth, (req, res) => {
-  scores = updateScores(req.body);
+apiRouter.post('/score', verifyAuth, async (req, res) => {
+  const scores = updateScores(req.body);
   res.send(scores);
 });
 
 // Get all song suggestions
-apiRouter.get('/songs', (_req, res) => {
+apiRouter.get('/songs', async (_req, res) => {
+  const songs = await DB.getSongs();
   res.send(songs);
 });
 
 // Submit a new song suggestion
-apiRouter.post('/song', (req, res) => {
+apiRouter.post('/song', verifyAuth, async (req, res) => {
   const newSong = {
     trackName: req.body.trackName,
     artist: req.body.artist,
@@ -96,7 +96,8 @@ apiRouter.post('/song', (req, res) => {
     date: new Date().toLocaleDateString(),
   };
 
-  songs.unshift(newSong);
+  await DB.addSong(newSong);
+  const songs = await DB.getSongs();
   if (songs.length > 20) songs.length = 20;
 
   res.send(songs);
@@ -125,14 +126,17 @@ async function createUser(userName, password) {
   const passwordHash = await bcrypt.hash(password, 10);
 
   const user = { userName, password: passwordHash, token: uuid.v4() };
-  users.push(user);
+  await DB.addUser(user);
 
   return user;
 }
 
 async function findUser(field, value) {
   if (!value) return null;
-  return users.find((u) => u[field] === value);
+  if (field === 'token') {
+    return DB.getUserByToken(value);
+  }
+  return DB.getUser(value);
 }
 
 app.listen(port, () => {
