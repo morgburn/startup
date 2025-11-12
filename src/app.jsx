@@ -6,8 +6,13 @@ import { Login } from './login/login';
 import { Suggest } from './suggest/suggest';
 import { Scores } from './scores/scores';
 import { Vote } from './vote/vote';
+import { AuthState } from './login/authState';
 
 export default function App() {
+  const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+  const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+  const [authState, setAuthState] = React.useState(currentAuthState);
+
   return (
     <BrowserRouter>
         <><header>
