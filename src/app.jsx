@@ -20,15 +20,22 @@ export default function App() {
           <nav>
               <menu>
                   <li><NavLink to="">Login</NavLink></li>
-                  <li><NavLink to="suggest">Make a Song Suggestion</NavLink></li>
-                  <li><NavLink to="vote">Vote</NavLink></li>
-                  <li><NavLink to="scores">View Top Suggestions</NavLink></li>
+                  {authState === AuthState.Authenticated && (
+                    <>
+                      <li><NavLink to="suggest">Make a Song Suggestion</NavLink></li>
+                      <li><NavLink to="vote">Vote</NavLink></li>
+                      <li><NavLink to="scores">View Top Suggestions</NavLink></li>
+                    </>
+                  )}
               </menu>
           </nav>
       </header>
       
       <Routes>
-        <Route path='/' element={<Login />} exact />
+        <Route path='/' element={<Login userName={userName} authState={authState} onAuthChange={(newUserName, newAuthState) => {
+          setUserName(newUserName);
+          setAuthState(newAuthState);}}
+        />} exact />
         <Route path='/suggest' element={<Suggest />} />
         <Route path='/scores' element={<Scores />} />
         <Route path='/vote' element={<Vote />} />
