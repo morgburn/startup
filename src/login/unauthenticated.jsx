@@ -1,72 +1,58 @@
 import React from 'react';
 
-export function Unauthenticated({ onLogin }) {
-    const [userName, setUserName] = React.useState('');
-    const [password, setPassword] = React.useState('');
-    const [error, setError] = React.useState('');
+import Button from 'react-bootstrap/Button';
+import { MessageDialog } from './messageDialog';
+
+export function Unauthenticated(props) {
+  const [userName, setUserName] = React.useState(props.userName);
+  const [password, setPassword] = React.useState('');
+  const [displayError, setDisplayError] = React.useState(null);
+
+  async function loginUser() {
+    loginOrCreate(`/api/auth/login`);
+  }
+
+  async function createUser() {
+    loginOrCreate(`/api/auth/create`);
+  }
 
   async function loginOrCreate(endpoint) {
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
-        body: JSON.stringify({ userName, password }),
-      });
-
-      if (response.ok) {
-        const user = await response.json();
-        localStorage.setItem('userName', user.userName);
-        onLogin(user.userName);
-      } else {
-        const body = await response.json();
-        setError(body.msg || 'Unknown error');
-      }
-    } catch (err) {
-      console.error(err);
-      setError('Network or server error');
+    const response = await fetch(endpoint, {
+      method: 'post',
+      body: JSON.stringify({ email: userName, password: password }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response?.status === 200) {
+      localStorage.setItem('userName', userName);
+      props.onLogin(userName);
+    } else {
+      const body = await response.json();
+      setDisplayError(`⚠ Error: ${body.msg}`);
     }
   }
 
-
   return (
-    <form className="login-form" onSubmit={(e) => e.preventDefault()}>
-      <h2>Login or Create Account</h2>
-      {error && <div style={{ color: 'red' }}>{error}</div>}
+    <>
       <div>
-        <label>Name:</label>
-        <input
-          type="text"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
-          placeholder="Your Name"
-        />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-      </div>
-      <div className="buttons">
-        <button
-          type="button"
-          onClick={() => loginOrCreate('/api/auth/login')}
-          disabled={!userName || !password}
-        >
+        <div className='input-group mb-3'>
+          <span className='input-group-text'>@</span>
+          <input className='form-control' type='text' value={userName} onChange={(e) => setUserName(e.target.value)} placeholder='Enter your email' />
+        </div>
+        <div className='input-group mb-3'>
+          <span className='input-group-text'>🔒</span>
+          <input className='form-control' type='password' onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password' />
+        </div>
+        <Button variant='primary' onClick={() => loginUser()} disabled={!userName || !password}>
           Login
-        </button>
-        <button
-          type="button"
-          onClick={() => loginOrCreate('/api/auth/create')}
-          disabled={!userName || !password}
-        >
+        </Button>
+        <Button variant='secondary' onClick={() => createUser()} disabled={!userName || !password}>
           Create
-        </button>
+        </Button>
       </div>
-    </form>
+
+      <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
+    </>
   );
 }
