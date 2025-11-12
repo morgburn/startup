@@ -1,23 +1,37 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
-export function Authenticated({userName, onLogout}) {
-  async function handleLogout() {
-    try {
-      await fetch('/api/auth/logout', {
-        method: 'DELETE',
+import './authenticated.css';
+
+export function Authenticated(props) {
+  const navigate = useNavigate();
+
+  function logout() {
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+    })
+      .catch(() => {
+        // Logout failed. Assuming offline
+      })
+      .finally(() => {
+        localStorage.removeItem('userName');
+        props.onLogout();
       });
-    } catch (err) {
-      console.error('Logout failed:', err);
-    } finally {
-      onLogout();
-    }
   }
 
-
   return (
-    <main className="welcome">
-      <h2>Welcome, {userName}!</h2>
-      <button onClick={handleLogout}>Logout</button>
-    </main>
+    <div>
+      <div className='userName'>Welcome, {props.userName}</div>
+      <Button variant='secondary' onClick={() => navigate('/suggest')}>
+        Suggest a Song
+      </Button>
+      <Button variant='primary' onClick={() => navigate('/vote')}>
+        Go to Vote Page
+      </Button>
+      <Button variant='outline-danger' onClick={() => logout()}>
+        Logout
+      </Button>
+    </div>
   );
 }
