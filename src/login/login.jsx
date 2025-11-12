@@ -1,27 +1,25 @@
 import React from 'react';
 import { Unauthenticated } from './unauthenticated';
 import { Authenticated } from './authenticated';
+import { AuthState } from './authState';
 
-export function Login() {
-  const [userName, setUserName] = React.useState(localStorage.getItem('userName'));
-  
-  function handleLogin(newUserName) {
-    setUserName(newUserName);
-    localStorage.setItem('userName', newUserName);
-  }
-
-  function handleLogout() {
-    setUserName(null);
-    localStorage.removeItem('userName');
-  }
-
+export function Login({ userName, authState, onAuthChange }) {
   return (
-    <main>
-      {userName ? (
-        <Authenticated userName={userName} onLogout={handleLogout} />
-      ) : (
-        <Unauthenticated onLogin={handleLogin} />
-      )}
+    <main className='container-fluid bg-secondary text-center'>
+      <div>
+        {authState !== AuthState.Unknown && <h1>Welcome to Bop Ballot!</h1>}
+        {authState === AuthState.Authenticated && (
+          <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
+        )}
+        {authState === AuthState.Unauthenticated && (
+          <Unauthenticated
+            userName={userName}
+            onLogin={(loginUserName) => {
+              onAuthChange(loginUserName, AuthState.Authenticated);
+            }}
+          />
+        )}
+      </div>
     </main>
   );
 }
