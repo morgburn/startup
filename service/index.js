@@ -16,11 +16,12 @@ let users = [];
 let songs = [];
 let scores = [];
 
-function setAuthCookie(res, token) {
-  res.cookie(authCookieName, token, {
+function setAuthCookie(res, authToken) {
+  res.cookie(authCookieName, authToken, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    secure: true,
     httpOnly: true,
-    secure: false,
-    sameSite: 'lax',
+    sameSite: 'strict',
   });
 }
 
@@ -29,20 +30,20 @@ app.use(`/api`, apiRouter);
 
 // CreateAuth - register a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  const { userName, password } = req.body;
-  if (await findUser('userName', userName)) {
+  const { email, password } = req.body;
+  if (await findUser('userName', email)) {
     return res.status(409).send({ msg: 'Existing user' });
   }
-  const user = await createUser(userName, password);
+  const user = await createUser(email, password);
   setAuthCookie(res, user.token);
   res.send({ userName: user.userName });
 });
 
 // GetAuth - log in existing user
 apiRouter.post('/auth/login', async (req, res) => {
-  const { userName, password } = req.body;
-  const user = await findUser('userName', req.body.userName);
-  if (user && (await bcrypt.compare(req.body.password, user.password))) {
+  const { email, password } = req.body;
+  const user = await findUser('userName', email);
+  if (user && (await bcrypt.compare(password, user.password))) {
     user.token = uuid.v4();
     setAuthCookie(res, user.token);
     return res.send({ userName: user.userName });
