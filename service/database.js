@@ -3,9 +3,10 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('bopballot');
 const userCollection = db.collection('user');
 const scoreCollection = db.collection('score');
+const songCollection = db.collection('songs');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -38,6 +39,15 @@ async function addScore(score) {
   return scoreCollection.insertOne(score);
 }
 
+async function addSong(song) {
+  await songCollection.insertOne(song);
+}
+
+async function getSongs(limit = 20) {
+  return await songCollection.find().sort({ _id: -1 }).limit(limit).toArray();
+}
+
+
 function getHighScores() {
   const query = { score: { $gt: 0, $lt: 900 } };
   const options = {
@@ -55,4 +65,6 @@ module.exports = {
   updateUser,
   addScore,
   getHighScores,
+  addSong,
+  getSongs
 };

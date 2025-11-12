@@ -34,25 +34,32 @@ export function Unauthenticated(props) {
   }
 
   return (
-    <>
-      <div>
-        <div className='input-group mb-3'>
-          <span className='input-group-text'>@</span>
-          <input className='form-control' type='text' value={userName} onChange={(e) => setUserName(e.target.value)} placeholder='Enter your email' />
-        </div>
-        <div className='input-group mb-3'>
-          <span className='input-group-text'>🔒</span>
-          <input className='form-control' type='password' onChange={(e) => setPassword(e.target.value)} placeholder='Enter your password' />
-        </div>
-        <Button variant='primary' onClick={() => loginUser()} disabled={!userName || !password}>
+    <main className="unauthenticated-container">
+      <h2>Login to Bop Ballot</h2>
+
+      <input
+        type="text"
+        placeholder="Your email"
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <div className="button-group">
+        <button onClick={() => loginOrCreate('/api/auth/login')} disabled={!userName || !password}>
           Login
-        </Button>
-        <Button variant='secondary' onClick={() => createUser()} disabled={!userName || !password}>
+        </button>
+        <button onClick={() => loginOrCreate('/api/auth/create')} disabled={!userName || !password}>
           Create
-        </Button>
+        </button>
       </div>
 
       <MessageDialog message={displayError} onHide={() => setDisplayError(null)} />
-    </>
+    </main>
   );
 }

@@ -5,7 +5,7 @@ import { AuthState } from './authState';
 
 export function Login({ userName, authState, onAuthChange }) {
   return (
-    <main className='container-fluid bg-secondary text-center'>
+    <main className='login-form'>
       <div>
         {authState !== AuthState.Unknown && <h1>Welcome to Bop Ballot!</h1>}
         {authState === AuthState.Authenticated && (
