@@ -115,17 +115,17 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **Backend service endpoints** - The backend has endpoints for retrieving song suggestions and submitting and retrieving the votes for the songs.
 - [x] **Frontend calls service endpoints** - The frontend now calls real backend endpoints which replaced the mocked functionality.
 
-```
 ## 🚀 DB/Login deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **User registration** - I did not complete this part of the deliverable.
-- [ ] **User login and logout** - I did not complete this part of the deliverable.
-- [ ] **Stores data in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Stores credentials in MongoDB** - I did not complete this part of the deliverable.
-- [ ] **Restricts functionality based on authentication** - I did not complete this part of the deliverable.
+- [x] **User registration** - Users can create an account from the login screen and their information is stored in MongoDB.
+- [x] **User login and logout** - Users can login and logout.
+- [x] **Stores data in MongoDB** - Song suggestions and votes are stored in MongoDB now.
+- [x] **Stores credentials in MongoDB** - Registered users information is stored in MongoDB.
+- [x] **Restricts functionality based on authentication** - Users can only get to the suggest, vote, and scores pages if they are logged in and authenticated.
 
+```
 ## 🚀 WebSocket deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
