@@ -15,31 +15,37 @@ export function Vote() {
                 setSongs(data);
             } catch (err) {
                 console.error('Error loading songs:', err);
-                // fallback to local storage in case backend is down
-                const stored = JSON.parse(localStorage.getItem('suggestedSongs')) || [];
-                setSongs(stored);
+                setSongs([]);
             }
         }
 
         fetchSongs();
     }, []);
 
-    function handleVote(trackName) {
-        const updated = songs.map(song => {
-            if (song.trackName === trackName) {
-                return { ...song, votes: (song.votes || 0) + 1 };
-            }
-            return song;
-        });
-        setSongs(updated);
-        localStorage.setItem('suggestedSongs', JSON.stringify(updated));
+  async function handleVote(trackName) {
+    try {
+      const response = await fetch('/api/score', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ trackName, score: 1 })
+      });
 
-        setVoted(prev =>
-            prev.includes(trackName)
-                ? prev.filter(id => id !== trackName)
-                : [...prev, trackName]
-        );
+      if (!response.ok) throw new Error('Failed to submit vote');
+
+      const updatedSongs = await response.json();
+      setSongs(updatedSongs);
+
+      setVoted(prev =>
+        prev.includes(trackName)
+          ? prev.filter(id => id !== trackName)
+          : [...prev, trackName]
+      );
+
+    } catch (err) {
+      console.error('Error submitting vote:', err);
+      alert('Failed to submit vote');
     }
+  }
 
     return (
         <main>
