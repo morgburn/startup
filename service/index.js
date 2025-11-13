@@ -72,13 +72,29 @@ const verifyAuth = async (req, res, next) => {
 // GetScores
 apiRouter.get('/scores', verifyAuth, async (req, res) => {
   const scores = await DB.getHighScores();
-  res.send(scores);
+  const normalized = scores.map((s) => ({
+    trackName: s.trackName,
+    artist: s.artist || '',
+    votes: s.score,
+  }))
+  res.send(normalized);
 });
 
 // SubmitScore
 apiRouter.post('/score', verifyAuth, async (req, res) => {
-  const scores = updateScores(req.body);
-  res.send(scores);
+  const {trackName, score } = req.body;
+  await DB.addScore({
+    trackName,
+    artist: artist || '',
+    score,
+  });
+  const updatedScores = await DB.getHighScores();
+  const normalized = updatedScores.map((s) => ({
+    trackName: s.trackName,
+    artist: s.artist || '',
+    votes: s.score,
+  }));
+  res.send(normalized);
 });
 
 // Get all song suggestions
@@ -102,25 +118,6 @@ apiRouter.post('/song', verifyAuth, async (req, res) => {
 
   res.send(songs);
 });
-
-// updateScores, keep only the top 10
-function updateScores(newScore) {
-  const existing = scores.find(
-    (s) => s.trackName === newScore.trackName && s.artist === newScore.artist
-  );
-
-  if (existing) {
-    existing.score += newScore.score;
-  } else {
-    scores.push({ ...newScore });
-  }
-
-  scores.sort((a, b) => b.score - a.score);
-  if (scores.length > 10) scores.length = 10;
-
-  return scores;
-}
-
 
 async function createUser(userName, password) {
   const passwordHash = await bcrypt.hash(password, 10);

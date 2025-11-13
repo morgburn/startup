@@ -8,7 +8,6 @@ const userCollection = db.collection('user');
 const scoreCollection = db.collection('score');
 const songCollection = db.collection('songs');
 
-// This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
   try {
     await db.command({ ping: 1 });
