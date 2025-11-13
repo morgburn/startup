@@ -34,8 +34,15 @@ async function updateUser(user) {
   await userCollection.updateOne({ email: user.email }, { $set: user });
 }
 
-async function addScore(score) {
-  return scoreCollection.insertOne(score);
+async function addScore({ trackName, artist, score }) {
+  return scoreCollection.updateOne(
+    { trackName },
+    {
+      $inc: { score: score },
+      $setOnInsert: { artist },
+    },
+    { upsert: true }
+  );
 }
 
 async function addSong(song) {

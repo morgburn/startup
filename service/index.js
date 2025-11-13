@@ -82,7 +82,7 @@ apiRouter.get('/scores', verifyAuth, async (req, res) => {
 
 // SubmitScore
 apiRouter.post('/score', verifyAuth, async (req, res) => {
-  const {trackName, score } = req.body;
+  const {trackName, artist, score } = req.body;
   await DB.addScore({
     trackName,
     artist: artist || '',

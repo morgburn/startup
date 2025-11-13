@@ -21,7 +21,7 @@ export function Scores() {
             songRows.push(
                 <tr key={i}>
                 <td>{i + 1}</td>
-                <td>{song.trackname}</td>
+                <td>{song.trackName}</td>
                 <td>{song.artist}</td>
                 <td>{song.votes}</td>
                 </tr>

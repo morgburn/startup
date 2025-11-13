@@ -12,7 +12,14 @@ export function Vote() {
                 const response = await fetch('/api/songs');
                 if (!response.ok) throw new Error('Failed to fetch songs');
                 const data = await response.json();
-                setSongs(data);
+                
+                setSongs(
+                  data.map(song => ({
+                    ...song,
+                    votes: song.votes ?? 0
+                  }))
+                );
+
             } catch (err) {
                 console.error('Error loading songs:', err);
                 setSongs([]);
@@ -32,8 +39,19 @@ export function Vote() {
 
       if (!response.ok) throw new Error('Failed to submit vote');
 
-      const updatedSongs = await response.json();
-      setSongs(updatedSongs);
+      const updatedScores = await response.json();
+      const updated = updatedScores.find(s => s.trackName === trackName);
+
+      setSongs(prev =>
+        prev.map(song =>
+          song.trackName === trackName
+          ? {
+            ...song,
+            votes: updated.votes ?? song.votes
+          }
+          : song
+        )
+      )
 
       setVoted(prev =>
         prev.includes(trackName)
