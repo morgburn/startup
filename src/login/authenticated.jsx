@@ -6,15 +6,14 @@ export function Authenticated(props) {
   const navigate = useNavigate();
 
   function logout() {
-    fetch('/api/auth/logout', { method: 'delete' })
-      .catch(() => {
-        // Logout failed
-      })
-      .finally(() => {
-        localStorage.removeItem('userName');
-        props.onLogout();
-        navigate('/login');
-      });
+    fetch(`/api/auth/logout`, {
+      method: 'delete',
+      credentials: 'include',
+    })
+
+      localStorage.removeItem('userName');
+      props.onLogout();
+      navigate('/');
   }
 
 
